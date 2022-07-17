@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+            // Restore bachground color of buttons and answer from previous check
+            function restoreButtons() {
+                // Restore answer for 1 part 1
+                document.querySelector("#answer1").innerHTML = "";
+                document.querySelector("#explanation1").innerHTML = "";
+
+                // Restore color of correct button
+                document.querySelector(".correct").style.backgroundColor = document.body.style.backgroundColor;
+                // Restore colors of incorrect buttons
+                document.querySelectorAll(".incorrect").forEach((item) => item.style.backgroundColor = document.body.style.backgroundColor);
+            };
+
+            // Restore text for part 2
+            function restoreText() {
+                document.querySelector("#answer2").innerHTML = "";
+                document.querySelector("#answer").style.backgroundColor = document.body.style.backgroundColor;
+            }
+
+            // When document loaded...
+            document.addEventListener("DOMContentLoaded", function() {
+
+                // When correct button clicked...
+                let correct = document.querySelector(".correct");
+                correct.addEventListener("click", function() {
+                    // Restore previous answers and clicked buttons
+                    restoreButtons();
+
+                    // Mark correct answer
+                    correct.style.backgroundColor = "green";
+                    document.querySelector("#answer1").innerHTML = "Correct!";
+                    document.querySelector("#explanation1").innerHTML = "There are eight planets in the solar system: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune";
+                });
+
+                // When incorrect button clicked...
+                // Get all incorrect buttons
+                let incorrects = document.querySelectorAll(".incorrect");
+                for (let i = 0; i < incorrects.length; i++) {
+                    incorrects[i].addEventListener("click", function() {
+                        // Restore previous answers and clicked buttons
+                        restoreButtons();
+
+                        // Mark incorrect answer
+                        incorrects[i].style.backgroundColor = "red";
+                        document.querySelector("#answer1").innerHTML = "Incorrect";
+                    })
+                };
+
+                let check = document.querySelector("#check");
+                check.addEventListener("click", function() {
+                    // Restore text
+                    restoreText();
+                    // Get answer as string
+                    let answer = document.querySelector("#answer");
+                    if (answer.value.toLowerCase() == "mars") {
+                        // Mark correct answer
+                        answer.style.backgroundColor = "green";
+                        document.querySelector("#answer2").innerHTML = "Correct!";
+                    }
+                    else {
+                        // Mark incorrect answer
+                        answer.style.backgroundColor = "red";
+                        document.querySelector("#answer2").innerHTML = "Incorrect";
+                    };
+                })
+            });
+
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3>How many  planets are there in the Solar system?</h3>
+
+                <button type="button" class="incorrect">Less then four</button>
+                <button type="button" class="incorrect">Four</button>
+                <button type="button" class="incorrect">Five</button>
+                <button type="button" class="incorrect">Six</button>
+                <button type="button" class="incorrect">Seven</button>
+                <button type="button" class="correct">Eight</button>
+                <button type="button" class="incorrect">More then eight</button>
+
+                <p id="answer1"></p>
+                <p id="explanation1"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>What is the fourth planet from the sun?</h3>
+                <input type="text" id="answer">
+                <button id="check">Click here to check</button>
+                <p id="answer2"></p>
+
+            </div>
+        </div>
+    </body>
+</html>
